@@ -1,0 +1,558 @@
+/*公共样式*/
+*{
+	margin:0;
+	padding:0;
+	border: 0;
+}
+
+body{
+	font-size:12px;
+	font-family: "微软雅黑";
+	color:#333;
+}
+
+ul,ol,li{
+	list-style-type: none;
+}
+
+.lf{
+	float: left;
+}
+
+.rf{
+	float: right;
+}
+
+.clearfix:after{
+	content: "";
+	display: block;
+	height: 0;
+	clear:both;
+	visibility: hidden;
+}
+.clearfix{
+	zoom:1;
+}
+
+a{
+	font-size:12px;
+	color:#666;
+	text-decoration: none;
+}
+
+a:hover{
+	color:#DD2727;
+}
+
+.box{
+	width:1200px;
+	margin:0 auto;
+}
+
+.header,.footer{
+	width: 100%;
+}
+
+.header .topBar{
+	height: 30px;
+	line-height: 30px;
+	background-color: #e3e4e5;
+	border-bottom: 1px solid #ccc;
+}
+
+.topBar .topLeft li{
+	float:left;
+	padding-right: 15px;
+}
+
+.topBar .topRight li{
+	float:right;
+	padding-left: 15px;
+	position: relative;
+}
+
+.topBar .topRight li .qrcode{
+	position: absolute;
+	top:21px;
+}
+.topBar .topRight li div.arrow{
+	position: relative;
+	left:26px;
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-width: 5px;
+	border-color:#e3e4e5 #e3e4e5 #fff; 
+}
+
+.topBar .topRight li img{
+	border-width:0px 1px 1px 1px;
+	border-style: solid;
+	border-color: #ccc;
+	padding: 3px;
+}
+
+.logoBar{
+	height: 100px;
+}
+.logoBar .logo{
+	width:220px;
+	height: 80px;
+	padding: 10px 0;
+	text-align: center;
+}
+.logoBar .logo img{
+	width: 160px;
+	height: 80px;
+}
+.logoBar .search{
+	width: 600px;
+	height: 70px;
+	margin:20px 30px 10px 70px;
+
+}
+.logoBar .search input{
+	width:450px;
+	height: 30px;
+	border:2px solid #C91623;
+	text-indent: 24px;
+	background: url(../images/search.jpg) no-repeat left center;
+}
+
+.logoBar .search button{
+	width: 100px;
+	height:34px;
+	background-color: #C91623;
+	color:#fff;
+	font:18px/34px "微软雅黑";
+	cursor: pointer;
+}
+
+.logoBar .search .hotSearch{
+	margin-top: 8px;
+}
+
+.search .hotSearch a{
+	padding:0 8px 0 0;
+	border-right: 1px solid #ccc;
+}
+
+.search .hotSearch a:last-child{
+	border-right: 0px;
+}
+
+.logoBar .cart{
+	width: 180px;
+	height: 32px;
+	line-height: 34px;
+	border: 1px solid #ccc;
+	margin-top: 20px;
+	text-align: center;
+	color: #f00;
+	cursor: pointer;
+
+}
+
+.logoBar .cart i{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+	background: url(../images/pics.png) no-repeat -100px -85px;
+}
+
+.logoBar .cart span{
+	display: inline-block;
+	width: 1.5em;
+	height: 1.5em;
+	margin-left: 5px;
+	line-height: 1.5em;
+	text-align: center;
+	border-radius: 1.5em;
+	background-color: #c00;
+	color:#fff;
+}
+
+.menuBar{
+	width: 100%;
+	height: 40px;
+	background-color: #DD2727;
+}
+.menuBar li{
+	float: left;
+	text-align: center;
+}
+
+.menuBar li>a{
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	padding: 0px 30px;
+	font-weight: bold;
+	font-size: 16px;
+	color:#fff;
+}
+.menuBar li>a:hover{
+	background-color: #f00;
+}
+
+.menuBar li>a.current{
+	background-color: #f00;
+}
+.menuBar li.category{
+	position: relative;
+}
+
+.menuBar li.category>a{
+	width: 160px;
+	background-color: #b1191a;
+}
+
+#nav{
+	position: absolute;
+	top:40px;
+	width: 220px;
+	height: 390px;
+	background-color: rgba(255,200,200,0.6);
+}
+#nav dl{
+	width: 200px;
+	height: 45px;
+	padding: 10px;
+	text-align: left;
+}
+#nav dl:hover{
+	background-color: rgba(235,235,235,0.9);
+}
+
+#nav dl dt a{
+	font-size: 14px;
+	font-weight: bold;
+	color:#333;
+}
+#nav dl dd{
+	float: left;
+	height: 16px;
+	line-height: 16px;
+	margin-top: 5px;
+	padding-right:5px; 
+}
+#nav dl dd a{
+	font-size: 14px;
+	color:#333;
+}
+
+#nav dl dd a:hover{
+	color:#f00;
+}
+
+
+/*分类菜单样式*/
+#nav{
+	position: absolute;
+	left:0px;
+	top:40px;
+	width:218px;
+	height: 388px;
+	border: 1px solid #ccc;
+	background-color:rgba(255,200,200,0.6);
+}
+#nav dl{
+	margin:0;
+	width:200px;
+	height: 45px;
+    padding: 10px;
+
+}
+
+#nav dl:hover{
+	background-color: rgba(255,255,255,0.9);
+}
+
+#nav dl dt{
+   font-size:14px;
+   color:#333;;
+   text-align: left;
+   font-weight: bold;
+}
+#nav dl dd{
+   float:left;
+   height:16px;
+   line-height: 16px;
+   margin-top:5px;
+   padding-right:5px; 
+}
+
+#nav dl dd a{
+   text-align: left;
+   font-size:14px;
+   font-weight: normal;
+   color:#333;
+}
+#nav dl dd a:hover{
+	text-decoration: underline;
+	color: #d00;
+}
+/*分类菜单二级菜单样式*/
+#nav dl div.nextList{
+	position: absolute;
+	top:0px;
+	left: 220px;
+	width: 980px;
+	height: 390px;
+	background-color: #fff;
+	display: none;
+}
+#nav dl  div .cateLeft{
+	position: static;
+	float: left;
+	padding: 10px 20px 10px;
+	width:660px;
+	height:370px;
+}
+#nav dl  div .clist{
+	position: static;
+	height: 55px;
+	padding-top:10px; 
+	background: transparent;
+	clear: both;
+}
+
+#nav dl  div  .listTitle{
+	position: static;
+	float: left;
+	width:80px;
+	height: 60px;
+	background: transparent;
+	padding-top:5px; 
+	color: #333;
+	font-weight: bold;
+	font-size: 14px;
+}
+#nav dl  div .listContent{
+	position: static;
+	float: left;
+	width:580px;
+	height: 65px;
+	border-bottom:1px dotted #ccc; 
+	background: transparent;
+	display: block;
+}
+
+#nav dl  div .clist:last-child .listContent{
+	border-bottom:0;
+}
+
+#nav dl  div .listContent a{
+	float: left;
+	color: #666;
+	width: 72px;
+	padding-right:5px; 
+	height: 25px;
+	line-height: 25px;
+	font-size: 13px;
+}
+#nav dl  div .listContent a:hover{
+	color:#e93052;
+	text-decoration: underline;
+	font-size: 14px;
+}
+#nav dl div .cateRight{
+	position: static;
+	float: right;
+	padding: 20px 20px 10px;
+	width:240px;
+	height:360px;	
+}
+
+#nav dl div .cateRight img{
+	width: 240px;
+	border: 0;
+	height: 110px;
+	padding-top:10px; 
+}
+/*底部样式*/
+.footer{	
+	width: 100%;
+    padding: 30px 0;
+    margin-top:30px ;
+    border-top:3px solid #ccc;
+	text-align: center;
+	background: #ddd;
+
+}
+/*底部样式*/
+.footer{
+	padding: 30px 0;
+	border-top:3px solid #ccc; 
+	margin-top: 30px;
+	text-align: center;
+	background-color: #ddd;
+}
+
+.footer p{
+	line-height: 2em;
+}
+
+.rightMenu{
+	position: fixed;
+	right: 0px;
+	bottom: 0px;
+	width: 35px;
+	height: 100%;
+	background-color: rgba(0,0,0,0.9);
+}
+
+.rightMenu .midBar{
+	position: absolute;
+	top:320px;
+	width: 35px;
+}
+.rightMenu  li{
+	width: 35px;
+	height:35px; 
+	cursor:pointer;
+}
+.rightMenu ul.midBar li:hover,.rightMenu ul.bottomBar li:hover{
+	background-color: #f00;
+}
+
+.rightMenu .midBar li:nth-child(1){
+	background: url(../images/pics2.png) no-repeat -88px -175px;
+}
+.rightMenu .midBar li:nth-child(2){
+	background: url(../images/pics2.png) no-repeat -50px -0px;
+}
+.rightMenu  .midBar li:nth-child(3){
+	background: url(../images/pics2.png) no-repeat -49px -50px;
+}
+.rightMenu .midBar li:nth-child(4){
+	background: url(../images/pics2.png) no-repeat -49px -100px;
+}
+.rightMenu .bottomBar{
+	position: absolute;
+	bottom:0px;
+	width: 35px;	
+}
+
+.rightMenu .bottomBar li:nth-child(1){
+	background: url(../images/pics2.png) no-repeat -49px -300px;
+}
+.rightMenu .bottomBar li:nth-child(2){
+	background: url(../images/pics2.png) no-repeat -49px -255px;
+}
+
+/*遮照层*/
+#shadow{
+	position: absolute;
+	z-index:100;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 1000px;
+	background: #000;
+	opacity: 0.6;
+	filter:alpha(opacity=50);
+	display: none;
+	
+}
+
+#login{
+	position: fixed;
+	left:0;
+	top:0;
+	z-index: 101;
+	width: 420px;
+	height:390px;
+	background-color:#dedede; 
+	display: none;
+	border: 4px solid #ccc;
+	border-radius: 5px;
+}
+
+#close{
+	position: absolute;
+	right:-10px;
+	top:-10px;
+	width: 20px;
+	height: 20px;
+	padding: 5px;
+	text-align: center;
+	background: #000;
+	color:#fff;
+	font:bold 24px/20px "微软雅黑";
+	border-radius: 30px;
+	cursor: pointer;
+}
+#loginTitle{
+    height: 2.2em;
+    padding-left:8px;
+    background-color: #C91623;
+    font:normal 18px/2em "微软雅黑";
+    color:#fff;
+}
+
+#loginForm{
+    padding: 25px 30px;
+    font-size:16px;
+}
+
+#login table td{
+    height: 65px;
+    line-height: 65px;
+}
+
+#login input{
+    width:260px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #bbb;
+    /*border-radius: 3px;*/
+    padding-left:5px;
+    font-size:14px;
+}
+
+
+#login img{
+    height: 35px;
+    width: 90px;
+    margin-left:-94px;
+    line-height: 35px;
+    vertical-align: middle;
+}
+
+#login .loginBtn{
+    display: block;
+    width:100px;
+    height: 30px;
+    line-height: 30px;
+    margin:5px auto;
+    padding: 5px 90px;
+    background: #b00;
+    border-radius: 5px;
+    letter-spacing: 1em;
+    color:#fff;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#login .loginBtn:hover{
+    background:#e00;
+    color:#fff;
+}
+
+#login .toLogin{
+    height:15px;
+    line-height: 15px;
+    text-align: center;
+    font-size:12px;
+}
+
+#login .toLogin span{
+    margin:0 5px;
+}
+#login .toLogin span a{
+    color:#0081ef;
+}

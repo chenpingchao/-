@@ -1,0 +1,440 @@
+一、Laravel的执行流程
+URL地址: http://域名/index.php/路由
+如果想省去index.php需要apache开启伪静态(rewrite)
+URL地址: http://域名/路由
+
+入口文件 -> 路由 -> 中间件 -> 控制器 -> 模型 -> 视图
+
+二、路由
+作用：建立URL地址和程序之间的映射
+文件：routes/web.php
+
+1)基础路由
+Route::请求方式('路由名称',function(){})
+Route::get('路由',function(){})
+Route::post('路由',function(){})
+Route::match(['get','post'],'路由',function(){})
+Route::any(路由',function(){})
+
+//除了get请求之外，其它的请求方式都要经过CSRF中间件的过滤
+CSRF(跨站请求伪造)
+解决方法：
+方法一：在表单中添加一个CSRF令牌的隐藏域 {{csrf_field}}
+方法二: 可以将某个路由排除在csrf中间件过滤之外
+在app/Http/Middleware/VerifyCsrfToken.php中添加排除路由
+protected $except = [
+    '路由名称'
+];
+
+2)参数路由
+必选参数
+URL: http://域名/路由/参数值
+Route::get('路由/{参数}',function($参数){})
+
+可选参数
+URL: http://域名/路由/[参数值]
+Route::get('路由/{参数?}',function($参数=默认值){})
+
+对路由参数进行正则限制
+Route::get('路由/{参数}',function($参数){}) -> where('参数','正则')
+Route::get('路由/{参数1}/{参数2}',function($参数1,$参数2){}) -> where(['参数1'=>'正则1','参数2'=>'正则2'])
+
+3)命名路由
+作用：可以使用路由别名来生成URL地址，但是不能作为路由名称写在URL地址中
+
+Route::get('路由/{参数}',function($参数){}) -> name('别名');
+
+生成URL: route('别名');
+
+4)分组路由
+方式一：按照路由前缀来分组
+Route::prefix('路由前缀')->group(function(){
+    Route::get('test/index','TestController@index')->name('test.index');
+})
+对应的URL: http://域名/路由前缀/test/index
+
+方式二：按照控制器文件的命名空间来分组(方便找控制器文件)
+Route::namespace('空间名称')->group(function(){
+  Route::get('test/index','TestController@index')->name('test.index');
+})
+
+对应的URL: http://域名/test/index
+对应的控制文件: app/Http/Controller/空间名称目录/TestController.php
+
+三、中间件
+1）第一步：新建中间件文件
+php artisan make:middleware Test
+//生成中间件文件
+app/Http/Middleware/Test.php
+2) 第二步：在handle方法写入中间件功能
+public function handle($request, Closure $next)
+{
+        // 执行动作  日志  访问控制
+        return $next($request);
+}
+public function handle($request, Closure $next)
+{
+        $response = $next($request);
+        // 执行动作    日志
+        return $response;
+}
+
+3）第三步：注册中间件
+ 方式一：全局中间件
+ 全局注册：每一个请求都要执行的中间件
+ 在文件app/http/kernel.php中写入
+ protected $middleware = [
+         \App\Http\Middleware\Log::class,
+  ];
+
+ 方式二：路由中间件
+ 在文件app/http/kernel.php中写入
+ protected $routeMiddleware = [
+         'login'=>\App\Http\Middleware\login::class,
+  ];
+ 在路由文件web.php中给指定路由添加中间件
+ Route::get('test1','TestController@test1')-> middleware('login');
+ Route::middleware('login')->group(function(){
+         Route::any('test/index','TestController@index')->name('test/index');
+  });
+
+
+四、控制器
+1）创建控制器
+php artisan make:controller TestController
+生成控制器文件
+app/Http/Controllers/TestController.php
+2)输出视图
+方式一：
+return view('视图名称',[
+   'title' => '标题'
+])
+
+方式二：
+return view('视图名称') -> with([
+   'title' => '标题'
+])
+
+方式三：
+$title = '标题';
+return view('视图名称' , compact('title'));
+
+3) 请求
+use  Illuminate\Http\Request;
+public function index(Request $request ){
+   //1.获取请求信息
+   $request -> isMethod('post'); //判断是否是一个post请求
+   $request -> ajax(); //判断是否是一个ajax请求
+
+   //2.获取请求数据
+
+   //获取单个参数
+   request() -> 参数;
+   request() -> input('参数')
+   request('参数')
+
+   //获取所有参数
+   request() -> all();
+   request() -> input();
+
+   //获取部分参数
+   request() -> only('参数1','参数2');
+   request() -> except('参数1','参数2');
+   request(['参数1','参数2']);
+
+}
+
+4)响应
+//响应json
+return response() -> json([数组]);
+//响应视图
+return view();
+//页面跳转
+方式一：通过路由
+return redirect('路由');
+方式二：通过路由别名
+return redirect()->route('路由别名');
+方式三：通过控制和方法
+return redirect()->action('控制器@方法');
+//返回上一页面
+return back();
+
+5)cookie操作
+use Illuminate\Support\Facades\Cookie;
+//设置
+Cookie::queue('名','值',时间);  //时间单位为分钟
+
+//读取
+Cookie::get('名')
+
+//删除
+Cookie::queue('名',null,-1);
+
+6)session操作
+//设置
+session()->put('名','值');
+session( ['名'=>值,'名'=>值] )
+session()->put( ['名'=>值,'名'=>值] )
+//判断是否存在
+session()->has('名称');
+//获取
+session()->get('名称');
+session('名称');
+session() -> all();
+//删除
+session()->forget('名称');
+session()->flush();
+
+7)闪存(利用session保存请求的数据，这个数据在下次请求之前会被销毁)
+//闪存请求数据
+request()->flash();
+//获取闪存数据
+old('名称');
+
+
+五、模型
+1）原生SQL
+use Illuminate\Support\Facades\DB;
+增 （返回布尔值）
+DB::insert('insert into member(username,password) values(?,?)',['Rose',md5(123)]);
+删（返回受影响的行数）
+DB::delete('delete from member where id=?',[10]);
+改（返回受影响的行数）
+DB::update('update member set money=? where id=?',[1000,1]);
+查 （返回数组）
+DB::select('select * from member');
+其它 （没有返回值的SQL）
+DB::statement('没有返回值的SQL');
+事务处理
+DB::beginTransaction();
+DB::rollBack();
+DB::commit();
+
+2)查询构造器(重要)
+use Illuminate\Support\Facades\DB;
+增
+DB::table('表名')->insert( ['字段名'=>'值','字段名'=>'值'] ); //返回布尔值
+DB::table('表名')->insertGetId( ['字段名'=>'值','字段名'=>'值'] ); //返回最后一次插入记录的主键id
+
+删
+DB::table('表名') ->where('id',10) -> delete();
+
+更新
+DB::table('表名') -> where('id',10) -> update( ['字段名'=>'值','字段名'=>'值'] );
+DB::table('表名') -> where('id',10) -> increment('money',10);
+DB::table('表名') -> where('id',10) -> decrement('money',10, ['字段名'=>'值','字段名'=>'值'] );
+
+查询
+//查询多条记录,返回对象集合
+DB::table('表名') -> get();
+//查询一条记录，返回对象
+DB::table('表名') -> first();
+//返回某个字段的值
+DB::table('表名') -> value('字段名');
+//查询常用子句
+DB::table('表名') -> select('字段名','字段名',...)
+                  -> where()
+                  -> groupBy('字段')
+                  -> having()
+                  -> orderBy('id','desc')
+                  -> offset(0)
+                  -> limit(5)
+                  -> get();
+
+//统计总条数
+DB::table('表名')->count('id');
+//统计最大（小）值
+DB::table('表名')->max('字段')
+DB::table('表名')->min('字段')
+//统计平均值
+DB::table('表名')->avg('字段')
+//统计总和
+DB::table('表名')->sum('字段')
+
+
+3）ORM (对象关系映射，每一张表映射为一个Model类)
+//创建模型
+php artisan make:model Member
+模型文件： app/Member.php
+
+//指定模型对应的表名（默认为模型名称的复数）
+protected $table = '表名';
+
+//指定主键 (默认为id)
+protected $primaryKey = 'id';
+
+
+//关闭自动维护时间戳,则不需要created_at、updated_at字段
+public $timestamps = false;
+
+//自定义时间戳字段名
+const CREATED_AT = 'add_time';
+const UPDATED_AT = 'update_time';
+
+//将自动插入的时间改为时间戳
+protected function getDateFormat(){
+       return time();
+ }
+
+//将自动更新的时间改为时间戳
+protected function fromDateFormat($val){
+      return time();
+ }
+
+//阻止查询结果中的时间戳默认格式化
+protected function asDateTime($val){
+        return $val;
+}
+
+//导入对应的模型类
+use app\Member;
+
+//增
+save (需要created_at 和updated_at字段) //返回数据对象
+$member  =  new Member();
+$member  -> username = 'Rose';
+$member  -> password = md5('123');
+$member  -> save();
+
+create (需要created_at 和updated_at字段) //返回数据对象
+指定允许批量赋值的字段
+protected $fillable=['username', 'password'];
+Member::create(['username'=>'Rose','password'=>md5('123')])
+
+firstOrCreate (需要created_at 和updated_at字段)
+如果存在则返回数据对象，如果不存在则先创建然后返回数据对象
+Member::firstOrcreate(['username'=>'Rose','password'=>md5('123')])
+
+//删 返回受影响行数
+Member::destroy(10);
+Member::destroy([10,20]);
+Member::destroy(10,20);
+
+//改 返回受影响行数
+Member::where() -> update(['字段'=>'值'])
+
+//查询
+//根据主键查询 返回对象集合
+Member::find(10);
+Member::find([10,20]);
+
+//查询全表记录 返回对象集合
+Member::all();
+
+
+五、视图
+Blade 视图文件使用 .blade.php 作为文件扩展名，被存放在 resources/views 目录
+
+//输出变量
+{{$变量名}}
+//输出数组
+{{$数组['下标']}}
+//输出对象
+{{$对象->属性}}
+{{$对象->方法()}}
+//输出html
+{!! $html !!}
+//输出默认值
+{{$变量名 or 默认值}}
+{{isset($变量名) ? $变量名 : 默认值}}
+//原样输出
+@{{$变量名}}
+//模板注释
+{{--注释内容--}}
+//原生php
+@php
+ echo $变量名;
+@endphp
+
+
+//生成URL
+{{ route('路由别名' , ['参数名'=>值] )}}
+{{ action('控制器@方法' , ['参数名'=>值] )}}
+{{ url(路由/参数) }}
+
+
+
+//流程控制
+@if ($num== 1)
+    .....
+@elseif ($num > 1)
+   ......
+@else
+    ......
+@endif
+
+@switch($i)
+    @case(1)
+        ......
+        @break
+
+    @case(2)
+        ......
+        @break
+
+    @default
+        ......
+@endswitch
+
+@for ($i = 0; $i < 10; $i++)
+     {{ $i }}
+@endfor
+
+{{$i=1}}
+@while ($i<10)
+   {{$i++}}
+@endwhile
+
+//遍历
+@foreach($arr as $k=>$v)
+  {{$loop->index}}
+  {{$loop->iteration}}
+  {{$loop->count}}
+  {{$loop->first}}
+  {{$loop->last}}
+
+@endforeach
+
+@forelse($arr as $k=>$v)
+  {{$loop->index}}
+  {{$loop->iteration}}
+  {{$loop->count}}
+  {{$loop->first}}
+  {{$loop->last}}
+@empty
+
+@endforelse
+
+
+//文件包含
+@include("public.header")
+@include("public/header")
+
+//模板继承
+resources/public/layout.blade.php
+//创建父模板,将需要重写或扩展的部分声明出来
+@section('名称')
+//原内容
+@show
+
+@yield('名称');
+
+//创建子模板,继承父模板
+@extends('public.layout');
+
+@section('名称')
+//新内容
+@endsection
+
+@section('名称')
+@parent
+//新内容
+@stop
+
+
+//静态资源管理
+
+静态资源默认位置在public目录
+{{ asset('静态文件路径名称') }}
+<link rel="stylesheet" href="{{asset('css/public.css')}}"/>
+

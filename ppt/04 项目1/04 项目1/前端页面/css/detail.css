@@ -1,0 +1,108 @@
+/*商品详情页样式*/
+.goodsinfo{
+	margin-top:20px;
+}
+.leftinfo{
+	border:1px solid #eee;
+	padding:10px;
+}
+/* 放大镜样式 */
+	ul#thumblist {
+		display: block;
+	}
+	
+	ul#thumblist li {
+		float: left;
+		list-style: none;
+	}
+	
+	ul#thumblist li a {
+		margin:2px 9px 2px 0px;
+		display: block;
+		border: 1px solid #CCC;
+	}
+	
+	ul#thumblist li a.zoomThumbActive {
+		border: 2px solid #E54447;
+	}
+/* 右侧商品信息区样式 */
+.rightinfo{
+	margin-left:30px;width:760px;height:500px;
+}
+.rightinfo dl{
+	margin-top:15px; 
+}
+.rightinfo dl dd{
+	line-height: 2.5em;
+	font-size:15px;
+	color:#666;
+}
+.rightinfo dl dd span.marketprice{
+	text-decoration: line-through;
+	color:#333;
+	font-size: 18px;
+	font-weight: bold;
+}
+.rightinfo dl dd span.price{
+	color:#E54447;
+	font-size: 24px;
+	font-weight: bold;
+}
+.decrement,.increment{
+	display: inline-block;
+	font-size: 20px;
+	font-weight: bold;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+}
+#buynum{
+	display: inline-block;
+	width: 30px;
+	height:30px;
+	text-align: center;
+	line-height: 34px;
+	padding:2px;
+	font-weight: bold;
+	border: 1px solid #999;
+}
+
+/*添加到购物车按钮*/
+
+#buy{
+	margin:70px 0 0px 20px; 
+}
+#buy a{
+	display: inline-block;
+	width: 100px;
+	height:35px;
+	line-height: 35px;
+	text-align: center;
+	color:white;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius:8px; 
+	padding: 5px 30px;
+	cursor: pointer;
+	
+}
+
+#buy .tobuy{
+	background: #C40000;
+	margin-right:50px; 
+}
+
+#buy .tocart{
+	background: #D0773A;
+}
+
+#buy .tobuy:hover{
+	background: #ff0000;
+}
+
+#buy .tocart:hover{
+	background: #ECBA0E;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户中心-我的订单</title>
+<meta name="keywords" content="标题">
+<meta name="description" content="内容">
+<link type="text/css" rel="stylesheet" rev="stylesheet" href="../css/membercenter.css" />
+<style type="text/css">
+a:hover{ text-decoration:none; color:#00A3EC!important;}
+.infoul{text-align:center; padding:20px;}
+.infoul li{ float:left;width:40%; margin:0 3% 0; margin-bottom:40px; height:110px; border:1px solid #ddd; padding:20px 0; background:#F6F6F6}
+.infoul li p.infotime{font-size:16px;}
+.infoul li .infodetail{ text-align:right; padding-right:20px;}
+.infoul li .infodetail a{ font-size:14px; color:#0093DD}
+.infotime{ height:40px; line-height:40px;}
+.infomoney{ font-size:26px; font-weight:700;}
+.news{ margin:10px; border:1px solid #0093DD; padding-bottom:10px;}
+.news h1{padding: 10px 20px 0;}
+.news h1 a{font-size:16px; font-weight:700;}
+.news strong{ padding:5px 20px; display:block; color:#444;}
+.news p{ padding:0 20px;}
+.news h2{ font-size:18px; padding:8px 10px; border-bottom:1px solid #EEF2FB; background:#00A3EC; color:#fff; font-weight:700;}
+</style>
+</head>
+<body>
+<div class="buyer_day">	
+	<p class="select_title"><span>我的订单</span></p>
+	<div class="day_select">
+		<form action="" method="post"> 
+            <p class="day_time02">
+                <label>订单号:</label>
+                <input type="text" placeholder="请输入要查询的订单号"/>
+                <label>订单状态:</label>
+                <select><option>全部订单</option><option>等待卖家回复议价</option>
+                <option>卖家已回复议价</option>
+                </select>
+                <button  class="selbtn01" value="搜索">搜索</button>
+            </p>
+    	</form>
+	</div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="day_list">
+		<thead>
+			<tr>
+				<th class="xuhao"></th>
+				<th class="username">时间</th>
+				<th class="userlogin">订单号</th>			
+				<th class="usertime">订单状态</th>
+				<th class="userip">成交金额</th>
+				<th class="websort">操作</th>
+			</tr>
+		</thead>
+		<tbody id="pageBody">
+			<tr>
+            <td class="xuhao" style="color: #ff0000">1</td>
+            <td class="username">2014-12-2</td>
+            <td class="userlogin"><a href="orderdetail.html">0012354865655</a></td>            
+            <td class="usertime">已退款</td>
+            <td class="userip">12345.23</td>
+            <td class="websort">发货</td>
+            </tr>
+            <tr>
+            <td class="xuhao" style="color: #ff0000">2</td>
+            <td class="username">2014-12-2</td>
+            <td class="userlogin"><a href="#">0012354865655</a></td>     
+            <td class="usertime">已退款</td>
+            <td class="userip">12345.23</td>
+            <td class="websort">发货</td>
+            </tr>
+            <tr>
+            <td class="xuhao" style="color: #ff0000">3</td>
+            <td class="username">2014-12-2</td>
+            <td class="userlogin"><a href="#">0012354865655</a></td>
+            <td class="usertime">等待买家付款</td>
+            <td class="userip">12345.23</td>
+            <td class="websort">发货</td>
+            </tr>
+		</tbody>
+	</table>
+
+		  <div style="clear:both;"></div>
+    <div class="listpage" >
+        <a href="#" style=" margin:0 10px;">上一页</a>
+        <a href="#" class="current">1</a><a href="#">2</a><a href="#">...</a>
+        <a href="#" style=" margin:0 10px;">下一页</a>
+    </div>
+</div>
+</body>
+</html>

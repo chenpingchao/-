@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        img{
+            width:1300px;
+            height:500px;
+        }
+    </style>
+    <script src="jquery.js"></script>
+    <script src="jquery.lazyload.js"></script>
+</head>
+<body>
+<img src="images/mi1.jpg" alt=""/>
+<img src="images/mi2.jpg" alt=""/>
+
+<hr/>
+<img  class="lazy"  data-original="images/mi3.jpg"    alt=""/>
+<img  class="lazy"  data-original="images/mi4.jpg"    alt=""/>
+<img  class="lazy"  data-original="images/mi5.jpg"    alt=""/>
+<img  class="lazy"  data-original="images/mi6.jpg"    alt=""/>
+<img  class="lazy"  data-original="images/mi7.jpg"    alt=""/>
+</body>
+<script>
+        //启用懒加载
+        $('img.lazy').lazyload({
+              placeholder : "images/loading.gif", //用图片提前占位
+              effect:'fadeIn', //加载动画效果为淡入
+              //threshold :180 //在距离元素180像素时预加载
+        })
+</script>
+</html>

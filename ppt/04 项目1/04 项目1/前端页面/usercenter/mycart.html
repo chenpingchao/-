@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link type="text/css" rel="stylesheet" rev="stylesheet" href="../css/membercenter.css" />
+</head>
+<body>
+
+<div class="buyer_day box"> 
+  <p class="select_title"><span>我的购物车</span></p>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="day_list">
+    <thead>
+      <tr>
+        <th class="xuhao"></th>
+        <th width="15%">商品图片</th>
+        <th width="30%">商品名称</th>
+        <th width="10%">商品单价(元)</th>
+        <th width="20%">商品数量</th>
+        <th width="10%">小计(元)</th>
+        <th width="5%">操作</th>
+      </tr>
+    </thead>
+    <tbody id="pageBody">
+          <tr>
+                <td class="xuhao" style="color: #ff0000"><input checked="checked" onchange="gettotalprice();" type="checkbox" name="chk[]" /></td>
+                <td >
+                    <a href="">
+                        <img src="../images/iphone.jpg" alt="" style="width:80px;margin:10px;" />
+                    </a>
+                </td>
+                <td ><a href="#">华为 P9 全网通 3GB+32GB版 流光金</a></td>
+                <td ><a href="#" class="price">3088.00</a></td>
+                <td >                   
+                        <a href="javascript:jian(1);" class="decrement">-</a>&nbsp;
+                        <input type="text" value="1" class="num" id="buynum1" onkeyup="chgnum(this)" />&nbsp;
+                        <a href="javascript:jia(1);" class="increment">+</a>
+                <td class="prices">3088.00</td>
+                <td ><a href="">删除</a></td>
+          </tr>
+          <tr>
+                <td class="xuhao" style="color: #ff0000"><input checked="checked"  onchange="gettotalprice();"  type="checkbox" name="chk[]" /></td>
+                <td >
+                    <a href="">
+                        <img src="../images/iphone.jpg" alt="" style="width:80px;margin:10px;" />
+                    </a>
+                </td>
+                <td ><a href="#">华为 P9 全网通 3GB+32GB版 流光金</a></td>
+                <td ><a href="#" class="price">3088.00</a></td>
+                <td >                   
+                        <a href="javascript:jian(2);" class="decrement">-</a>&nbsp;
+                        <input type="text" value="1"  class="num" id="buynum2"  onkeyup="chgnum(this)" />&nbsp;
+                        <a href="javascript:jia(2);" class="increment">+</a>
+                <td class="prices">3088.00</td>
+                <td ><a href="">删除</a></td>
+            </tr>
+            <tr>
+               <td  class="xuhao" style="color: #ff0000">
+                <input type="checkbox"  checked="checked" onchange="gettotalprice();" id="chkAll" name="chkAll" />  
+              </td>
+              <td  class="xuhao" style="color: #ff0000">
+                <a href="">全部删除</a>
+              </td>
+              <td colspan="5" id="buy">
+                  <span>总价:<b id="totalprice">￥888.88</b></span>
+                  <a href="" class="tobuy">去结算</a>
+              </td>
+            </tr>
+    </tbody>
+  </table>
+
+   
+
+</body>
+    <script type="text/javascript">
+    function chk(){
+        var chkAll=document.getElementById('chkAll');
+        var chks=document.getElementsByName('chk[]');
+        for(var i=0;i<chks.length;i++){
+            chks[i].checked=chkAll.checked;
+        }
+    }
+    document.getElementById('chkAll').onclick=chk;
+     $('.cateList').hide();
+    function jian(n){
+        var buynum=document.getElementById('buynum'+n).value;
+        if(buynum>1){
+        document.getElementById('buynum'+n).value=parseInt(buynum)-1;
+        }
+        getprices();
+        gettotalprice(); 
+    }
+    function jia(n){
+        var buynum=document.getElementById('buynum'+n).value;
+        if(buynum<199){
+            document.getElementById('buynum'+n).value=parseInt(buynum)+1;
+        }
+        getprices();
+        gettotalprice();
+    }
+
+    function chgnum(v){
+        if(v.value<1){
+            v.value=1;
+        }
+        if(v.value>199){
+            v.value=199;
+        }
+        if(isNaN(v.value)){
+            v.value=1;
+        }
+
+        gettotalprice();
+    }
+
+    function getprices(){
+       var nums=document.getElementsByClassName('num');
+       var price=document.getElementsByClassName('price');
+       var prices=document.getElementsByClassName('prices'); 
+       for(var i=0;i<price.length;i++){
+       
+           prices[i].innerHTML=parseInt(price[i].innerHTML)*parseInt(nums[i].value);
+  
+      };
+    }
+
+   function gettotalprice(){
+	 getprices();
+      var inputs=document.getElementsByName('chk[]');
+      var prices=document.getElementsByClassName('prices'); 
+      var totalprice=0;
+      for(var i=0;i<inputs.length;i++){
+        if(inputs[i].checked){
+           totalprice+=parseInt(prices[i].innerHTML);
+        };
+      };
+     document.getElementById('totalprice').innerHTML='￥'+totalprice;
+   }
+
+   gettotalprice(); 
+    </script>
+</html>

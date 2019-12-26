@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的购物车</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link type="text/css" rel="stylesheet" rev="stylesheet" href="css/membercenter.css" />
+    <link rel="shortcut icon" href="/favicon.ico">
+    <style type="text/css">
+       #pageBody input{
+          width:25px;
+          height: 15px;
+          text-align: center;
+        }
+    </style>
+    <script type="text/javascript" src="js/jQuery.1.8.2.min.js"></script>
+</head>
+<body>
+
+	<!-- 头部开始 -->
+	<div class="header">
+		<div class="topBar">
+			<div class="box">
+				<ul class="topLeft">
+					<li>
+						<span>欢迎您，来到易购网</span>
+					</li>
+					<li>
+						<a href="#">请登录</a>
+					</li>
+					<li>
+						<a href="#">免费注册</a>
+					</li>
+				</ul>
+				<ul class="topRight">
+					<li>
+						<a href="#">关注易购网</a>
+						<div class="qrcode">
+							<div class="arrow"></div>
+							<img src="images/qrcode.jpg" alt="">
+						</div>
+					</li>
+					<li>
+						<a href="#">帮助中心</a>
+					</li>
+					<li>
+						<a href="#">我的收藏</a>
+					</li>
+					<li>
+						<a href="#">我的订单</a>
+					</li>
+					<li>
+						<a href="#">用户中心</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="logoBar box">
+			<div class="logo lf">
+				<a href="#"><img src="images/logo.png" alt="logo" /></a>
+			</div>
+			<div class="search lf">
+				<input type="text" name="keywords" placeholder="请输入商品关键字" class="lf">
+				<button class="lf">搜索</button>
+				<div class="clearfix"></div>
+				<div class="hotSearch">
+					<a href="">平板电脑</a>
+					<a href="">平板电脑</a>
+					<a href="">平板电脑</a>
+					<a href="">平板电脑</a>
+					<a href="">平板电脑</a>
+					<a href="">平板电脑</a>
+					<a href="">平板电脑</a>
+					<a href="">平板电脑</a>
+				</div>
+
+			</div>
+			<div class="cart lf">
+				<i></i>
+				我的购物车
+				<span>0</span>
+			</div>
+		</div>
+		<div class="menuBar">
+			<ul class="box">
+				
+				<li>
+					<a href="" >首页</a>
+				</li>
+				<li>
+					<a href="">热卖专区</a>
+				</li>
+				<li>
+					<a href="">积分商城</a>
+				</li>
+				<li>
+					<a href="">品牌专卖</a>
+				</li>
+				<li>
+					<a href="">限时秒杀</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- 头部结束 -->
+<div class="buyer_day box"> 
+  <p class="select_title"><span>我的购物车</span></p>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="day_list">
+    <thead>
+      <tr>
+        <th class="xuhao"></th>
+        <th width="15%">商品图片</th>
+        <th width="30%">商品名称</th>
+        <th width="10%">商品单价(元)</th>
+        <th width="20%">商品数量</th>
+        <th width="10%">小计(元)</th>
+        <th width="5%">操作</th>
+      </tr>
+    </thead>
+    <tbody id="pageBody">
+          <tr>
+                <td class="xuhao" style="color: #ff0000"><input checked="checked" onchange="gettotalprice();" type="checkbox" name="chk[]" /></td>
+                <td >
+                    <a href="">
+                        <img src="images/iphone.jpg" alt="" style="width:80px;margin:10px;" />
+                    </a>
+                </td>
+                <td ><a href="#">华为 P9 全网通 3GB+32GB版 流光金</a></td>
+                <td ><a href="#" class="price">3088.00</a></td>
+                <td >                   
+                        <a href="javascript:decrement(1);" class="decrement">-</a>&nbsp;
+                        <input type="text" value="1" class="num" id="buynum1" onkeyup="chgnum(this)" />&nbsp;
+                        <a href="javascript:increment(1);" class="increment">+</a>
+                <td class="prices">3088.00</td>
+                <td ><a href="">删除</a></td>
+          </tr>
+           <tr>
+                <td class="xuhao" style="color: #ff0000"><input checked="checked" onchange="gettotalprice();" type="checkbox" name="chk[]" /></td>
+                <td >
+                    <a href="">
+                        <img src="images/iphone.jpg" alt="" style="width:80px;margin:10px;" />
+                    </a>
+                </td>
+                <td ><a href="#">华为 P9 全网通 3GB+32GB版 流光金</a></td>
+                <td ><a href="#" class="price">3088.00</a></td>
+                <td >                   
+                        <a href="javascript:decrement(2);" class="decrement">-</a>&nbsp;
+                        <input type="text" value="1" class="num" id="buynum2" onkeyup="chgnum(this)" />&nbsp;
+                        <a href="javascript:increment(2);" class="increment">+</a>
+                <td class="prices">3088.00</td>
+                <td ><a href="">删除</a></td>
+          </tr>
+            <tr>
+               <td  class="xuhao" style="color: #ff0000">
+                <input type="checkbox"  checked="checked" onchange="gettotalprice();" id="chkAll" name="chkAll" />  
+              </td>
+              <td  class="xuhao" style="color: #ff0000">
+                <a href="">全部删除</a>
+              </td>
+              <td colspan="5" id="buy">
+                  <span>总价:<b id="totalprice">￥888.88</b></span>
+                  <a href="myorder.html" class="tobuy">去结算</a>
+              </td>
+            </tr>
+    </tbody>
+  </table>
+
+  <div style="clear:both;"></div>
+ 
+</div>  
+    <div style="clear:both;"></div>
+<!-- 底部开始 -->
+	<div class="footer" style="position:fixed;bottom:0px;left:0px;">
+		<p>手机热卖 | 手机热卖 | 手机热卖 | 手机热卖 | 手机热卖 | 手机热卖 | 手机热卖</p>
+		<p>版权所有：河南云和数据信息技术有限公司</p>
+		<p>© CopyRight2017 All rights reserved.</p>
+		<p>豫ICP备14003305号</p>
+	</div>
+	<!-- 底部结束 -->
+	<!-- 右侧菜单开始 -->
+  <div class="rightMenu">
+    <ul class="midBar">
+      <li onclick="toLogin();"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul class="bottomBar">
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <!-- 右侧菜单结束 -->
+  <!-- 遮照层开始 -->
+  <div id="shadow"></div>
+  <!-- 遮照层结束 -->
+  <!-- 登录层开始 -->
+  <div id="login">
+    <div id="close">&times;</div>
+        <div id="loginTitle">用户登录</div>
+        <div id="loginForm">
+            <form action="" method="post">
+                <table border="0">
+                    <tr>
+                        <td><label>用户名：</label></td>
+                        <td>
+                            <input type="text" placeholder="请输入用户名" name="username">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>密码：</label></td>
+                        <td><input type="password" placeholder="请输入密码" name="pwd"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label>验证码：</label></td>
+                        <td>
+                            <input type="text" name="verify" class="yzm">
+                            <img src="images/yzm.png" class="yzmImg" >
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" id="loginTd">
+
+                            <a class="loginBtn" onclick="">登录</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="toLogin">
+                    <span>
+                    您还没有账号？请 <a href="register.html">免费注册</a>
+                    </span>
+                    <span>
+                    忘记密码？<a href="#" class="">找回密码</a>
+                    </span>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+  </div>
+  <!-- 登录层结束 -->
+</body>
+<script type="text/javascript" src="js/myfocus/myfocus-2.0.4.min.js"></script>
+<script>
+
+
+    function chk(){
+        var chkAll=document.getElementById('chkAll');
+        var chks=document.getElementsByName('chk[]');
+        for(var i=0;i<chks.length;i++){
+            chks[i].checked=chkAll.checked;
+        }
+    }
+    document.getElementById('chkAll').onclick=chk;
+
+    function decrement(n){
+        var buynum=document.getElementById('buynum'+n).value;
+        if(buynum>1){
+        document.getElementById('buynum'+n).value=parseInt(buynum)-1;
+        }
+        getprices();
+        gettotalprice(); 
+    }
+    function increment(n){
+        var buynum=document.getElementById('buynum'+n).value;
+        if(buynum<199){
+            document.getElementById('buynum'+n).value=parseInt(buynum)+1;
+        }
+        getprices();
+        gettotalprice();
+    }
+
+    function chgnum(v){
+        if(v.value<1){
+            v.value=1;
+        }
+        if(v.value>199){
+            v.value=199;
+        }
+        if(isNaN(v.value)){
+            v.value=1;
+        }
+
+        gettotalprice();
+    }
+
+    function getprices(){
+       var nums=document.getElementsByClassName('num');
+       var price=document.getElementsByClassName('price');
+       var prices=document.getElementsByClassName('prices'); 
+       for(var i=0;i<price.length;i++){
+       
+           prices[i].innerHTML=parseInt(price[i].innerHTML)*parseInt(nums[i].value);
+  
+      };
+    }
+
+   function gettotalprice(){
+		getprices();
+      var inputs=document.getElementsByName('chk[]');
+      var prices=document.getElementsByClassName('prices'); 
+      var totalprice=0;
+      for(var i=0;i<inputs.length;i++){
+        if(inputs[i].checked){
+           totalprice+=parseInt(prices[i].innerHTML);
+        };
+      };
+     document.getElementById('totalprice').innerHTML='￥'+totalprice;
+   }
+
+   gettotalprice(); 
+
+   var shadow=document.getElementById('shadow');
+   var login=document.getElementById('login'); 
+    function toLogin(){ 
+    //弹出遮照层
+    shadow.style.display="block";
+    //shadow.style.height=document.documentElement.scrollHeight+'px';
+    //登录层   
+    login.style.display="block"
+    login.style.left=(document.documentElement.clientWidth-login.offsetWidth)/2+'px';
+    login.style.top=(document.documentElement.clientHeight-login.offsetHeight)/2+'px';
+  }
+
+  shadow.onclick=document.getElementById('close').onclick=function(){
+    shadow.style.display="none";
+    login.style.display="none";
+  }
+
+
+    </script>
+</html>

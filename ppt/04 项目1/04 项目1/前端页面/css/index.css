@@ -1,0 +1,108 @@
+/*首页样式*/
+.topAd{
+	width: 100%;
+	background-color:#ff0000;
+	text-align: center; 
+}
+/*轮播广告*/
+.ad{
+	height: 390px;
+}
+.ad ul li img{
+	width: 1200px;
+	height: 390px;
+}
+
+#myfocus{
+	z-index: -1;
+}
+.main{
+	margin-top: 10px;
+}
+.floor{
+	height: 520px;
+}
+.floor .floorTitle{
+	height: 2em;
+	line-height: 2em;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.floor .floorOne{
+	color:#f00;
+	border-bottom: 2px solid #f00;
+}
+
+.floor .floorTwo{
+	color:#0ff;
+	border-bottom: 2px solid #0ff;
+}
+
+.floor .floorThree{
+	color:#090;
+	border-bottom: 2px solid #090;
+}
+.floor  .goodsAd{
+	position: relative;
+	width: 270px;
+	height: 460px;
+	text-align: center;
+	background-color: #BD581D;
+	margin-top: 5px;
+
+}
+
+.floor .goodsAd img{
+	width: 270px;
+	height: 400px;
+}
+
+.floor .goodsAd div{
+	position: absolute;
+	bottom: 0px;
+	width: 270px;
+	height: 100px;
+	color:#fff;
+	font-size: 16px;
+	line-height: 2.5em;
+	background-color:rgba(0,0,0,0.5) 
+}
+
+.floor .goodsAd div b{
+	display: block;
+	font-size:24px;
+	font-weight: bold;
+}
+.goodsList{
+	width: 930px;
+}
+.floor .goodsList li{
+	float:left;
+	width: 178px;
+	height: 225px;
+	margin:5px 0px 0px 5px;
+	border:1px solid #ccc;
+	text-align: center;
+}
+.floor .goodsList img{
+	position: relative;
+	width: 178px;
+	height: 178px;
+}
+.floor .goodsList img:hover{
+	top:1px;
+	left:2px;
+}
+.floor .goodsList a{
+	font-size:13px;
+}
+
+.floor .goodsList li p{
+	font-size:14px;
+	color: #f00;
+}
+.floor .goodsList li p span{
+	font-size:18px;
+	font-weight: bold;
+}
